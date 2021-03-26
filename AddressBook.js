@@ -63,7 +63,7 @@ class AddressBook {
 
     get phoneNumber() { return this._phoneNumber}
     set phoneNumber(phoneNumber) { 
-        let nameRegex = RegExp('^([9]{1}[1]{1})\\s{1}[0-9]{10}$');
+        let nameRegex = RegExp('^([9]{1}[1]{1})\\s{0,1}[0-9]{10}$');
         if(nameRegex.test(phoneNumber))
             this._phoneNumber = phoneNumber;
         else throw 'Invalid Phone Number';
@@ -83,9 +83,29 @@ class AddressBook {
     }
 }
 
+let addressBook = new AddressBook("Saud", "Hasan", "Turner", "Dehra", "Uttra", "248100", "91 8454695878","saud@gmail.com");
 try{
-    let addressBook = new AddressBook("Saud", "Hasan", "Turner", "Dehra", "Uttra", "248100", "91 8454695878","saud@gmail.com");
-    console.log(addressBook.toString());
+    addressBook.firstName = "Chandan";
+    addressBook.lastName = "Joshi";
+    addressBook.address = "Almora";
+    addressBook.city = "Garhwal";
+    addressBook.state = "Uttra";
+    addressBook.zip = "459620";
+    addressBook.phoneNumber = "918562489652";
+    addressBook.email = "chandan@gmail.com";
+    console.log("Validating: "+addressBook.toString());
 } catch (e) {
     console.error(e);
 }
+let newaddressBook = new AddressBook("Saud", "Hasan", "Turner", "Dehra", "Uttra", "248100", "91 8454695878","saud@gmail.com");
+console.log(newaddressBook.toString());
+
+let addressBookArr = new Array();
+addressBookArr.push(addressBook);
+addressBookArr.push(newaddressBook);
+console.log(addressBookArr);
+
+
+
+
+
