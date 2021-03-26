@@ -170,6 +170,7 @@ function addContacts(addressBookArr){
     });
 }
 
+//UC7
 function searchAndEditContact(addressBookArr){
     let fname = prompt("Enter First Name to search Contact: ");
     let lname = prompt("Enter Last Name to search Contact: ");
@@ -191,6 +192,7 @@ function searchAndEditContact(addressBookArr){
     console.log("UC4 \n"+addressBookArr.toString());
 }
 
+//UC5
 function searchAndDeleteContact(addressBookArr) {
     let fname = prompt("Enter First Name to search Contact: ");
     let lname = prompt("Enter Last Name to search Contact: ");
@@ -202,50 +204,72 @@ function searchAndDeleteContact(addressBookArr) {
     });
 }
 
-
+//UC6
 function getCount(addressBookArr) {
     let count = addressBookArr.length;
     console.log("UC6 \nNumber of Contacts: "+count);
 }
 
-
+//UC8 - UC9 - UC10
 function searchPersonByCityOrState(addressBookArr){
     console.log("Enter your choice:\n1.Search by City\n2.Search By State\n")
     let choice = Number(prompt());
     if(choice == 1){
         let cityName = prompt("Enter city name to Search: ");
+        let newAddressBook = new Array();
         addressBookArr.forEach(entries => {
-            let newAddressBook = new Array();
             if(entries.city === cityName){
-                newAddressBook.push(entries);
-                console.log("UC9 \n"+newAddressBook.toString());
-            } else{
-                console.log("No Such Contact Exist");
+                newAddressBook.push(entries);    
             }
-            console.log("UC10 \nNumber of Contacts by city: "+newAddressBook.length);
         });
+        console.log("UC9 \n"+newAddressBook.toString());
+        console.log("UC10 \nNumber of Contacts by city: "+newAddressBook.length);
     }else if(choice == 2){
         let stateName = prompt("Enter state name to Search: ");
+        let newAddressBook = new Array();
         addressBookArr.forEach(entries => {
-            let newAddressBook = new Array();
             if(entries.state === stateName){
-                newAddressBook.push(entries);
-                console.log("UC9 \n"+newAddressBook.toString());
-            } else{
-                console.log("No Such Contact Exist");
-            }
-            console.log("UC10 \nNumber of Contacts by State: "+newAddressBook.length);
+                newAddressBook.push(entries);   
+            } 
         });
+        console.log("UC10 \nNumber of Contacts by State: "+newAddressBook.length);
+        console.log("UC9 \n"+newAddressBook.toString());
     } else console.log("Invalid Choice");
 }
 
+//UC11 - UC12
 function sortContacts(addressBookArr){
-    sortedAddressbook = addressBookArr.sort((first,second) => {
-        if(first.firstName > second.firstName) return 1;
-        else if(first.firstName < second.firstName) return -1;
-        else return 0;
-    });
-    console.log("UC11 \nSorted Contacts-\n"+addressBookArr.toString());
+    console.log("Sort Contacts by:\n1.Name \n2.City \n3.State \n4.Zip");
+    let choice = Number(prompt());
+    if(choice == 1) {
+        sortedAddressbook = addressBookArr.sort((first,second) => {
+            if(first.firstName > second.firstName) return 1;
+            else if(first.firstName < second.firstName) return -1;
+            else return 0;
+        });
+        console.log("UC11 \nSorted Contacts By Name-\n"+addressBookArr.toString());
+    } else if(choice == 2){
+        sortedAddressbook = addressBookArr.sort((first,second) => {
+            if(first.city > second.city) return 1;
+            else if(first.city < second.city) return -1;
+            else return 0;
+        });
+        console.log("UC12 \nSorted Contacts By City-\n"+addressBookArr.toString());
+    } else if(choice == 3){
+        sortedAddressbook = addressBookArr.sort((first,second) => {
+            if(first.state > second.state) return 1;
+            else if(first.state < second.state) return -1;
+            else return 0;
+        });
+        console.log("UC12 \nSorted Contacts By State-\n"+addressBookArr.toString());
+    } else if(choice == 4){
+        sortedAddressbook = addressBookArr.sort((first,second) => {
+            if(first.zip > second.zip) return 1;
+            else if(first.zip < second.zip) return -1;
+            else return 0;
+        });
+        console.log("UC12 \nSorted Contacts By Zip-\n"+addressBookArr.toString());
+    } else console.log("Invalid Choice");
 }
 
 
