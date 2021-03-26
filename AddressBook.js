@@ -79,30 +79,55 @@ class AddressBook {
 
     toString(){
         return "Contact [ First Name: " +this.firstName+ ", Last Name: " +this.lastName+ ", Address: " +this.address+ ", City: " +this.city+
-                ", State: " +this.state+ ", Zip: " +this.zip+ ", Phone Number: " +this.phoneNumber+ ", Email: "+this.email+ " ]";
+                ", State: " +this.state+ ", Zip: " +this.zip+ ", Phone Number: " +this.phoneNumber+ ", Email: "+this.email+ " ]\n";
     }
 }
 
+//UC 1
+let addressBook = new AddressBook("Saud", "Hasan", "Turner", "Dehra", "Uttra", "248002", "917894561260","saud@gmail.com");
+console.log("UC1 \n"+addressBook.toString());
 
+//UC 2
+try{
+    addressBook.firstName = "Saud";
+    addressBook.lastName = "Hasan";
+    addressBook.address = "Turner";
+    addressBook.city = "Dehra";
+    addressBook.state = "Uttra";
+    addressBook.zip = "248002";
+    addressBook.phoneNumber = "918563245986";
+    addressBook.email = "saud@gmail.com";
+    console.log("UC2 \n"+addressBook.toString())
+} catch (e) {
+    console.error(e);
+}
 
+//UC3
 let addressBookArr = new Array();
+addressBookArr.push(addressBook);
+console.log("UC3 \n"+addressBookArr.toString());
+
+//UC4
 const prompt = require('prompt-sync')();
 let flag = true;
 
 while(flag == true){
-    console.log("Enter Your Choice: \n1.View Contact\n2.Add Contact\n3.Search and Edit Contact\nAny other Number to Exit");
-    let choice = Number(prompt())
+    console.log("Enter Your Choice: \n1.View Contact\n2.Add Contact\n3.Search and Edit Contact\n4.Search and Delete\n0.Exit");
+    let choice = Number(prompt());
     if(choice == 1){
-        viewDetails(addressBookArr);
+        viewContacts(addressBookArr);
     } else if(choice == 2){
-        addDetails(addressBookArr);
+        addContacts(addressBookArr);
     } else if(choice == 3){
-        searchAndEditDetails(addressBookArr);
-    } else
+        searchAndEditContact(addressBookArr);
+    } else if(choice == 4){
+        searchAndDeleteContact(addressBookArr);
+    } else if(choice == 0){
         flag = false; 
+    } else console.log("Invalid Choice!!");
 }
 
-function viewDetails(addressBookArr){
+function viewContacts(addressBookArr){
     try{
         console.log(addressBookArr.toString());
     } catch(e){
@@ -110,7 +135,7 @@ function viewDetails(addressBookArr){
     }
 }
 
-function addDetails(addressBookArr){
+function addContacts(addressBookArr){
     try{
         const num = Number(prompt('Enter Number of Contacts to add: '));
         for(let i =0;i < num;i++){
@@ -124,6 +149,7 @@ function addDetails(addressBookArr){
             email = prompt("Enter Email Address: ");
             let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneNumber,email);
             addressBookArr.push(addressBook);
+            console.log("Contact Added Successfully");
         }
         console.log(addressBookArr.toString());
     } catch (e){
@@ -131,9 +157,9 @@ function addDetails(addressBookArr){
     }
 }
 
-function searchAndEditDetails(addressBookArr){
+function searchAndEditContact(addressBookArr){
     let fname = prompt("Enter First Name to search Contact: ");
-    let lname = prompt("Enter Last Name to search Contact: ")
+    let lname = prompt("Enter Last Name to search Contact: ");
     addressBookArr.forEach(element => {
         try{
             if(element.firstName === fname && element.lastName === lname){
@@ -143,13 +169,24 @@ function searchAndEditDetails(addressBookArr){
                 element.zip = prompt("Enter the new Zip: ");
                 element.phoneNumber = prompt("Enter the new Phone Number: ");
                 element.email = prompt("Enter the new Email: ");
+                console.log("Contact Edited Successfully");
             } else console.log("Contact Does not Exist.")
         } catch (e) {
             console.error(e);
         }
     });
-    console.log(addressBookArr.toString());
+    console.log("UC4 \n"+addressBookArr.toString());
+}
 
+function searchAndDeleteContact(addressBookArr) {
+    let fname = prompt("Enter First Name to search Contact: ");
+    let lname = prompt("Enter Last Name to search Contact: ");
+    addressBookArr.forEach(entries => {
+        if(entries.firstName === fname && entries.lastName === lname){
+            addressBookArr.pop(entries);
+            console.log("Contact Deleted Successfully");
+        }
+    });
 }
 
 
