@@ -155,7 +155,7 @@ function addContacts(addressBookArr){
                     city = prompt("Enter City: ");
                     state = prompt("Enter State: ");
                     zip = prompt("Enter Zip: ");
-                    phoneNumber = prompt("Enter Phone Number");
+                    phoneNumber = prompt("Enter Phone Number: ");
                     email = prompt("Enter Email Address: ");
                     let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneNumber,email);
                     addressBookArr.push(addressBook);
@@ -195,15 +195,17 @@ function searchAndDeleteContact(addressBookArr) {
     addressBookArr.forEach(entries => {
         if(entries.firstName === fname && entries.lastName === lname){
             addressBookArr.pop(entries);
-            console.log("Contact Deleted Successfully");
+            console.log("UC5 \n Contact Deleted Successfully");
         }
     });
 }
 
+
 function getCount(addressBookArr) {
     let count = addressBookArr.length;
-    console.log("Number of Contacts: "+count);
+    console.log("UC6 \n Number of Contacts: "+count);
 }
+
 
 function searchPersonByCityOrState(addressBookArr){
     let cityName = prompt("Enter city name to Search: ");
@@ -212,7 +214,7 @@ function searchPersonByCityOrState(addressBookArr){
         if(entries.city === cityName || entries.state === stateName){
             let newAddressBook = new Array();
             newAddressBook.push(entries);
-            console.log(newAddressBook.toString());
+            console.log("UC9 \n"+newAddressBook.toString());
         } else{
             console.log("No Such Contact Exist");
         }
