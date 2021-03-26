@@ -195,7 +195,7 @@ function searchAndDeleteContact(addressBookArr) {
     addressBookArr.forEach(entries => {
         if(entries.firstName === fname && entries.lastName === lname){
             addressBookArr.pop(entries);
-            console.log("UC5 \n Contact Deleted Successfully");
+            console.log("UC5 \nContact Deleted Successfully");
         }
     });
 }
@@ -203,7 +203,7 @@ function searchAndDeleteContact(addressBookArr) {
 
 function getCount(addressBookArr) {
     let count = addressBookArr.length;
-    console.log("UC6 \n Number of Contacts: "+count);
+    console.log("UC6 \nNumber of Contacts: "+count);
 }
 
 
@@ -211,13 +211,14 @@ function searchPersonByCityOrState(addressBookArr){
     let cityName = prompt("Enter city name to Search: ");
     let stateName = prompt("Enter state name to Search: ")
     addressBookArr.forEach(entries => {
+        let newAddressBook = new Array();
         if(entries.city === cityName || entries.state === stateName){
-            let newAddressBook = new Array();
             newAddressBook.push(entries);
             console.log("UC9 \n"+newAddressBook.toString());
         } else{
             console.log("No Such Contact Exist");
         }
+        console.log("UC10 \nNumber of Contacts by city or State: "+newAddressBook.length);
     });
 }
 
