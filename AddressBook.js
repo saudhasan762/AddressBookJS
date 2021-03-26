@@ -112,7 +112,7 @@ const prompt = require('prompt-sync')();
 let flag = true;
 
 while(flag == true){
-    console.log("Enter Your Choice: \n1.View Contact\n2.Add Contact\n3.Search and Edit Contact\n4.Search and Delete\n5.Number Of Contacts\n6.Search By City Or State\n0.Exit");
+    console.log("Enter Your Choice: \n1.View Contact\n2.Add Contact\n3.Search and Edit Contact\n4.Search and Delete\n5.Number Of Contacts\n6.Search By City Or State\n7.Sort Contacts\n0.Exit");
     let choice = Number(prompt());
     if(choice == 1){
         viewContacts(addressBookArr);
@@ -126,6 +126,8 @@ while(flag == true){
         getCount(addressBookArr);
     } else if(choice == 6){
         searchPersonByCityOrState(addressBookArr);
+    } else if(choice == 7){
+        sortContacts(addressBookArr);
     } else if(choice == 0){
         flag = false; 
     } else console.log("Invalid Choice!!");
@@ -208,18 +210,42 @@ function getCount(addressBookArr) {
 
 
 function searchPersonByCityOrState(addressBookArr){
-    let cityName = prompt("Enter city name to Search: ");
-    let stateName = prompt("Enter state name to Search: ")
-    addressBookArr.forEach(entries => {
-        let newAddressBook = new Array();
-        if(entries.city === cityName || entries.state === stateName){
-            newAddressBook.push(entries);
-            console.log("UC9 \n"+newAddressBook.toString());
-        } else{
-            console.log("No Such Contact Exist");
-        }
-        console.log("UC10 \nNumber of Contacts by city or State: "+newAddressBook.length);
+    console.log("Enter your choice:\n1.Search by City\n2.Search By State\n")
+    let choice = Number(prompt());
+    if(choice == 1){
+        let cityName = prompt("Enter city name to Search: ");
+        addressBookArr.forEach(entries => {
+            let newAddressBook = new Array();
+            if(entries.city === cityName){
+                newAddressBook.push(entries);
+                console.log("UC9 \n"+newAddressBook.toString());
+            } else{
+                console.log("No Such Contact Exist");
+            }
+            console.log("UC10 \nNumber of Contacts by city: "+newAddressBook.length);
+        });
+    }else if(choice == 2){
+        let stateName = prompt("Enter state name to Search: ");
+        addressBookArr.forEach(entries => {
+            let newAddressBook = new Array();
+            if(entries.state === stateName){
+                newAddressBook.push(entries);
+                console.log("UC9 \n"+newAddressBook.toString());
+            } else{
+                console.log("No Such Contact Exist");
+            }
+            console.log("UC10 \nNumber of Contacts by State: "+newAddressBook.length);
+        });
+    } else console.log("Invalid Choice");
+}
+
+function sortContacts(addressBookArr){
+    sortedAddressbook = addressBookArr.sort((first,second) => {
+        if(first.firstName > second.firstName) return 1;
+        else if(first.firstName < second.firstName) return -1;
+        else return 0;
     });
+    console.log("UC11 \nSorted Contacts-\n"+addressBookArr.toString());
 }
 
 
