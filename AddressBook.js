@@ -78,32 +78,80 @@ class AddressBook {
     }
 
     toString(){
-        return "Contact - firstName:" +this.firstName+ ", lastName:" +this.lastName+ " ,address:" +this.address+ " ,city:" +this.city+ " ,"+
-                "state:" +this.state+ ", zip:" +this.zip+ " ,phoneNumber:" +this.phoneNumber+ " , email:"+this.email;
+        return "Contact [ First Name: " +this.firstName+ ", Last Name: " +this.lastName+ ", Address: " +this.address+ ", City: " +this.city+
+                ", State: " +this.state+ ", Zip: " +this.zip+ ", Phone Number: " +this.phoneNumber+ ", Email: "+this.email+ " ]";
     }
 }
 
-let addressBook = new AddressBook("Saud", "Hasan", "Turner", "Dehra", "Uttra", "248100", "91 8454695878","saud@gmail.com");
-try{
-    addressBook.firstName = "Chandan";
-    addressBook.lastName = "Joshi";
-    addressBook.address = "Almora";
-    addressBook.city = "Garhwal";
-    addressBook.state = "Uttra";
-    addressBook.zip = "459620";
-    addressBook.phoneNumber = "918562489652";
-    addressBook.email = "chandan@gmail.com";
-    console.log("Validating: "+addressBook.toString());
-} catch (e) {
-    console.error(e);
-}
-let newaddressBook = new AddressBook("Saud", "Hasan", "Turner", "Dehra", "Uttra", "248100", "91 8454695878","saud@gmail.com");
-console.log(newaddressBook.toString());
+
 
 let addressBookArr = new Array();
-addressBookArr.push(addressBook);
-addressBookArr.push(newaddressBook);
-console.log(addressBookArr);
+const prompt = require('prompt-sync')();
+let flag = true;
+
+while(flag == true){
+    console.log("Enter Your Choice: \n1.View Contact\n2.Add Contact\n3.Search and Edit Contact\nAny other Number to Exit");
+    let choice = Number(prompt())
+    if(choice == 1){
+        viewDetails(addressBookArr);
+    } else if(choice == 2){
+        addDetails(addressBookArr);
+    } else if(choice == 3){
+        searchAndEditDetails(addressBookArr);
+    } else
+        flag = false; 
+}
+
+function viewDetails(addressBookArr){
+    try{
+        console.log(addressBookArr.toString());
+    } catch(e){
+        console.error(e);
+    }
+}
+
+function addDetails(addressBookArr){
+    try{
+        const num = Number(prompt('Enter Number of Contacts to add: '));
+        for(let i =0;i < num;i++){
+            firstName = prompt("Enter First Name: ");
+            lastName = prompt("Enter Last Name: ");
+            address = prompt("Enter Address: ");
+            city = prompt("Enter City: ");
+            state = prompt("Enter State: ");
+            zip = prompt("Enter Zip: ");
+            phoneNumber = prompt("Enter Phone Number");
+            email = prompt("Enter Email Address: ");
+            let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneNumber,email);
+            addressBookArr.push(addressBook);
+        }
+        console.log(addressBookArr.toString());
+    } catch (e){
+        console.error(e);
+    }
+}
+
+function searchAndEditDetails(addressBookArr){
+    let fname = prompt("Enter First Name to search Contact: ");
+    let lname = prompt("Enter Last Name to search Contact: ")
+    addressBookArr.forEach(element => {
+        try{
+            if(element.firstName === fname && element.lastName === lname){
+                element.address = prompt("Enter the new Address: ");
+                element.city = prompt("Enter the new City: ");
+                element.state = prompt("Enter the new State: ");
+                element.zip = prompt("Enter the new Zip: ");
+                element.phoneNumber = prompt("Enter the new Phone Number: ");
+                element.email = prompt("Enter the new Email: ");
+            } else console.log("Contact Does not Exist.")
+        } catch (e) {
+            console.error(e);
+        }
+    });
+    console.log(addressBookArr.toString());
+
+}
+
 
 
 
