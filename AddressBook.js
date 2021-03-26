@@ -112,7 +112,7 @@ const prompt = require('prompt-sync')();
 let flag = true;
 
 while(flag == true){
-    console.log("Enter Your Choice: \n1.View Contact\n2.Add Contact\n3.Search and Edit Contact\n4.Search and Delete\n5.Number Of Contacts\n0.Exit");
+    console.log("Enter Your Choice: \n1.View Contact\n2.Add Contact\n3.Search and Edit Contact\n4.Search and Delete\n5.Number Of Contacts\n6.Search By City Or State\n0.Exit");
     let choice = Number(prompt());
     if(choice == 1){
         viewContacts(addressBookArr);
@@ -124,6 +124,8 @@ while(flag == true){
         searchAndDeleteContact(addressBookArr);
     } else if(choice == 5){
         getCount(addressBookArr);
+    } else if(choice == 6){
+        searchPersonByCityOrState(addressBookArr);
     } else if(choice == 0){
         flag = false; 
     } else console.log("Invalid Choice!!");
@@ -201,6 +203,20 @@ function searchAndDeleteContact(addressBookArr) {
 function getCount(addressBookArr) {
     let count = addressBookArr.length;
     console.log("Number of Contacts: "+count);
+}
+
+function searchPersonByCityOrState(addressBookArr){
+    let cityName = prompt("Enter city name to Search: ");
+    let stateName = prompt("Enter state name to Search: ")
+    addressBookArr.forEach(entries => {
+        if(entries.city === cityName || entries.state === stateName){
+            let newAddressBook = new Array();
+            newAddressBook.push(entries);
+            console.log(newAddressBook.toString());
+        } else{
+            console.log("No Such Contact Exist");
+        }
+    });
 }
 
 
