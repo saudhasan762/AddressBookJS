@@ -112,7 +112,7 @@ const prompt = require('prompt-sync')();
 let flag = true;
 
 while(flag == true){
-    console.log("Enter Your Choice: \n1.View Contact\n2.Add Contact\n3.Search and Edit Contact\n4.Search and Delete\n0.Exit");
+    console.log("Enter Your Choice: \n1.View Contact\n2.Add Contact\n3.Search and Edit Contact\n4.Search and Delete\n5.Number Of Contacts\n0.Exit");
     let choice = Number(prompt());
     if(choice == 1){
         viewContacts(addressBookArr);
@@ -122,6 +122,8 @@ while(flag == true){
         searchAndEditContact(addressBookArr);
     } else if(choice == 4){
         searchAndDeleteContact(addressBookArr);
+    } else if(choice == 5){
+        getCount(addressBookArr);
     } else if(choice == 0){
         flag = false; 
     } else console.log("Invalid Choice!!");
@@ -187,6 +189,11 @@ function searchAndDeleteContact(addressBookArr) {
             console.log("Contact Deleted Successfully");
         }
     });
+}
+
+function getCount(addressBookArr) {
+    let count = addressBookArr.length;
+    console.log("Number of Contacts: "+count);
 }
 
 
