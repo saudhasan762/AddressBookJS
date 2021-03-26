@@ -138,25 +138,32 @@ function viewContacts(addressBookArr){
 }
 
 function addContacts(addressBookArr){
-    try{
-        const num = Number(prompt('Enter Number of Contacts to add: '));
+    const num = Number(prompt('Enter Number of Contacts to add: '));
+    addressBookArr.forEach(entries => {
         for(let i =0;i < num;i++){
-            firstName = prompt("Enter First Name: ");
-            lastName = prompt("Enter Last Name: ");
-            address = prompt("Enter Address: ");
-            city = prompt("Enter City: ");
-            state = prompt("Enter State: ");
-            zip = prompt("Enter Zip: ");
-            phoneNumber = prompt("Enter Phone Number");
-            email = prompt("Enter Email Address: ");
-            let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneNumber,email);
-            addressBookArr.push(addressBook);
-            console.log("Contact Added Successfully");
+            let fname = prompt("Enter First name to check: ");
+            if(entries.firstName === fname){
+                console.log("Contact with same name Exist!");
+            }
+            else{
+                try{
+                    firstName = prompt("Enter First Name: ");
+                    lastName = prompt("Enter Last Name: ");
+                    address = prompt("Enter Address: ");
+                    city = prompt("Enter City: ");
+                    state = prompt("Enter State: ");
+                    zip = prompt("Enter Zip: ");
+                    phoneNumber = prompt("Enter Phone Number");
+                    email = prompt("Enter Email Address: ");
+                    let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneNumber,email);
+                    addressBookArr.push(addressBook);
+                    console.log("Contact Added Successfully");
+                } catch (e){
+                    console.error(e);
+                }       
+            }
         }
-        console.log(addressBookArr.toString());
-    } catch (e){
-        console.error(e);
-    }
+    });
 }
 
 function searchAndEditContact(addressBookArr){
